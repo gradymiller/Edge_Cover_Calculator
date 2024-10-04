@@ -22,7 +22,7 @@ class Graph:
         visited[u] = True
         discovery_time[u] = self.time
         low[u] = self.time
-        self.time += 1
+        self.time += 1 # type: ignore
 
         for v in self.graph[u]:
             if not visited[v]:
@@ -80,7 +80,7 @@ class Graph:
         G.add_edges_from(self.edges)
 
         # Get the degrees of all nodes
-        degrees = dict(G.degree())  # Create a dictionary {node: degree}
+        degrees = dict(G.degree())  # type: ignore # Create a dictionary {node: degree}
 
         # Initialize variables to track the highest combined degree and the corresponding edge
         max_combined_degree = -1
@@ -91,7 +91,7 @@ class Graph:
             combined_degree = degrees[u] + degrees[v]  # Sum of degrees of both vertices of the edge
 
             # Update the best edge if this one has a higher combined degree
-            if combined_degree > max_combined_degree:
+            if combined_degree > max_combined_degree: # type: ignore
                 max_combined_degree = combined_degree
                 best_edge = (u, v)
 
@@ -100,7 +100,7 @@ class Graph:
     def find_best_edge_to_remove(self):
         G = nx.Graph()
         G.add_edges_from(self.edges)
-        degrees = dict(G.degree())
+        degrees = dict(G.degree()) # type: ignore
         ones = 0
         for key, value in degrees.items():
             if value == 1:
@@ -108,7 +108,7 @@ class Graph:
             elif value != 2:
                 break  # If any value is not 1 or 2, return False
 
-        if ones == 2 and len(degrees) - ones == list(degrees.values()).count(2):
+        if ones == 2 and len(degrees) - ones == list(degrees.values()).count(2): # type: ignore
             return None
         else:
             bridges = self.find_bridges()

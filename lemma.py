@@ -2,7 +2,6 @@
 # It inputs the nodes, edges, and an edge to delete
 # Then it splits the edges and adds the extra edge like the lemma requires
 # NOTE: This function does not return anything, it just updates the parameters
-import copy
 import networkx as nx
 # TODO: Test with multiple graphs, it works for the one below
 # This code for is for the case with e
@@ -14,7 +13,7 @@ edges = [(1, 2), (2, 3), (3, 1), (2, 4), (4, 5)]
 # This below reorders the edges so that the smallest number is first, making it easier to work with
 edges = [(min(a, b), max(a, b)) for a, b in edges]
 graph.add_edges_from(edges)
-degrees = graph.degree()
+degrees = graph.degree() # type: ignore
 deleted_edge = (2, 4)
 num1 = deleted_edge[0]
 num2 = deleted_edge[1]
@@ -28,7 +27,7 @@ def split_edges(nodes, edges, deleted_edge):
         if degrees[vertex] > 1:
             # Gets edges that are touching the vertex in deleted_edge
             edges_to_split = [i for i in edges if vertex in i]
-            edges_to_split_copy = copy.deepcopy(edges_to_split)
+            edges_to_split_copy = edges_to_split[:]
             # This orders the numbers in each pair so that num1 is first
             edges_to_split = [(vertex, a if a != vertex else b) if vertex in (a, b) else (a, b) for a, b in edges_to_split]
             #  This is used to check the highest numbered node so it knows what to make the new edges with
