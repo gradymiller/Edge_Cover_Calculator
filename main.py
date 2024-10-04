@@ -1,11 +1,4 @@
-# Instead of finding the formula, find edges covers of sequence, find simplest combo of fibonacci formula that satisfies all #s in sequence
-# TODO: alter input so that it knows where to add edges in the graph(X_n, where to increase n)
-# TODO: Calculate the sequence a ton of times out
-# TODO: Find a simple function using fibonacci_n that satisfies the sequence
-# TODO: Output the general parent function for the graph
-# TODO: Make each part into usable function
-# TODO: Graphviz
-# Potential Idea: Prompt for function_0 and where to expand at, program cutting open lemma for the basic function
+
 
 from matplotlib.pyplot import show
 import networkx as nx
@@ -32,7 +25,7 @@ def edge_cover_calc(edges):
         return chain.from_iterable(combinations(e, r) for r in range(len(e)+1))
     num_edge_covers = 0
     for eset in powerset(G.edges):
-        if nx.is_edge_cover(G, eset):
+        if nx.is_edge_cover(G, eset): # type: ignore
             num_edge_covers += 1
     num_vertices = G.number_of_nodes()
     num_edges = G.number_of_edges()

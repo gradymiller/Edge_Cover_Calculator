@@ -12,7 +12,7 @@ class Identifier:
         self.edges = edges
         self.components_list = []
         self.component_amount = 0
-        self.degrees = dict(self.graph.degree())
+        self.degrees = dict(self.graph.degree()) # type: ignore
 
     # Splits the edges up into their respective parts
     def separate_components(self):
