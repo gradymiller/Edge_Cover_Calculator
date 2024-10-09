@@ -84,7 +84,7 @@ class Graph:
 
         # Get the degrees of all nodes
         # type: ignore # Create a dictionary {node: degree}
-        degrees = dict(G.degree())
+        degrees = dict(G.degree()) # type: ignore
 
         # Initialize variables to track the highest combined degree and the corresponding edge
         max_combined_degree = -1
