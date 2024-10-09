@@ -1,6 +1,7 @@
 import networkx as nx
 from collections import defaultdict
 
+
 class Graph:
     def __init__(self, edges):
         self.time = None
@@ -22,12 +23,13 @@ class Graph:
         visited[u] = True
         discovery_time[u] = self.time
         low[u] = self.time
-        self.time += 1 # type: ignore
+        self.time += 1  # type: ignore
 
         for v in self.graph[u]:
             if not visited[v]:
                 parent[v] = u
-                self.bridge_util(v, visited, parent, discovery_time, low, bridges)
+                self.bridge_util(v, visited, parent,
+                                 discovery_time, low, bridges)
                 low[u] = min(low[u], low[v])
 
                 if low[v] > discovery_time[u]:
@@ -46,7 +48,8 @@ class Graph:
 
         for i in range(self.V):
             if not visited[i]:
-                self.bridge_util(i, visited, parent, discovery_time, low, bridges)
+                self.bridge_util(i, visited, parent,
+                                 discovery_time, low, bridges)
 
         return bridges
 
@@ -80,7 +83,8 @@ class Graph:
         G.add_edges_from(self.edges)
 
         # Get the degrees of all nodes
-        degrees = dict(G.degree())  # type: ignore # Create a dictionary {node: degree}
+        # type: ignore # Create a dictionary {node: degree}
+        degrees = dict(G.degree())
 
         # Initialize variables to track the highest combined degree and the corresponding edge
         max_combined_degree = -1
@@ -88,10 +92,11 @@ class Graph:
 
         # Loop through each edge to find the edge with the highest combined degree
         for u, v in self.edges:
-            combined_degree = degrees[u] + degrees[v]  # Sum of degrees of both vertices of the edge
+            # Sum of degrees of both vertices of the edge
+            combined_degree = degrees[u] + degrees[v]
 
             # Update the best edge if this one has a higher combined degree
-            if combined_degree > max_combined_degree: # type: ignore
+            if combined_degree > max_combined_degree:  # type: ignore
                 max_combined_degree = combined_degree
                 best_edge = (u, v)
 
@@ -100,7 +105,7 @@ class Graph:
     def find_best_edge_to_remove(self):
         G = nx.Graph()
         G.add_edges_from(self.edges)
-        degrees = dict(G.degree()) # type: ignore
+        degrees = dict(G.degree())  # type: ignore
         ones = 0
         for key, value in degrees.items():
             if value == 1:
@@ -108,7 +113,7 @@ class Graph:
             elif value != 2:
                 break  # If any value is not 1 or 2, return False
 
-        if ones == 2 and len(degrees) - ones == list(degrees.values()).count(2): # type: ignore
+        if ones == 2 and len(degrees) - ones == list(degrees.values()).count(2):  # type: ignore
             return None
         else:
             bridges = self.find_bridges()
@@ -125,6 +130,7 @@ class Graph:
             # Remove the edge with the highest combined degree in the cycle
             best_edge = self.find_highest_combined_degree_edge()
             return best_edge, 'C'
+
 
 edges = [(1, 2), (2, 3), (3, 1), (3, 4), (4, 5)]
 graph = Graph(edges)

@@ -4,6 +4,7 @@
 
 import networkx as nx
 
+
 class Identifier:
     def __init__(self, nodes, edges):
         self.graph = nx.Graph()
@@ -12,7 +13,7 @@ class Identifier:
         self.edges = edges
         self.components_list = []
         self.component_amount = 0
-        self.degrees = dict(self.graph.degree()) # type: ignore
+        self.degrees = dict(self.graph.degree())  # type: ignore
 
     # Splits the edges up into their respective parts
     def separate_components(self):
@@ -29,7 +30,8 @@ class Identifier:
     # Subtracts the path graphs out of the components list so non-path graphs can be outputted as the_rest
     def making_the_rest(self, path_graphs):
         # Flatten path_graphs (since it may contain lists of vertices)
-        flat_path_graphs = [vertex for sublist in path_graphs for vertex in sublist]
+        flat_path_graphs = [
+            vertex for sublist in path_graphs for vertex in sublist]
         return [vertex for vertex in self.nodes if vertex not in flat_path_graphs]
 
     # This is the main function of the class, only this one needs to be run
@@ -40,7 +42,8 @@ class Identifier:
         self.separate_components()
         # If there is 1 path graph, it just returns it
         if not self.count_parts():
-            path_graphs.append(self.components_list)  # Still keeping the structure for single component case
+            # Still keeping the structure for single component case
+            path_graphs.append(self.components_list)
             return path_graphs, the_rest
 
         # This loop iterates over each component (each separate piece of the graph)
@@ -59,13 +62,15 @@ class Identifier:
                     break  # If any degree is not 1 or 2, return False
             # Checks if it's a path graph based on previous data
             if ones == 2 and len(degree_list) - ones == list(degree_list.values()).count(2):
-                path_graphs.append(component)  # Each component is appended as a separate list
+                # Each component is appended as a separate list
+                path_graphs.append(component)
 
         # Only call making_the_rest after checking that there are path graphs
         if path_graphs:
             # Convert the path graphs and the remaining vertices to edges for ease of use
             the_rest = self.making_the_rest(path_graphs)
-            path_graph_edges = [self.vertex_to_edge(component) for component in path_graphs]
+            path_graph_edges = [self.vertex_to_edge(
+                component) for component in path_graphs]
             other_edges = self.vertex_to_edge(the_rest)
         else:
             path_graph_edges = []
@@ -79,27 +84,3 @@ test_nodes = [1, 3, 5, 6, 7, 8, 13, 14, 16]
 test_edges = [(6, 1), (7, 3), (1, 3), (8, 5), (6, 13), (7, 14), (8, 16)]
 test = Identifier(test_nodes, test_edges)
 print(test.check_type())
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

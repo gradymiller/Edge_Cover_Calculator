@@ -13,13 +13,15 @@ edges = [(1, 2), (2, 3), (3, 1), (2, 4), (4, 5)]
 # This below reorders the edges so that the smallest number is first, making it easier to work with
 edges = [(min(a, b), max(a, b)) for a, b in edges]
 graph.add_edges_from(edges)
-degrees = graph.degree() # type: ignore
+degrees = graph.degree()  # type: ignore
 deleted_edge = (2, 4)
 num1 = deleted_edge[0]
 num2 = deleted_edge[1]
 
 # The if-else statement only does the splitting if the edge is connected to other edges
 # The vertex is deleted if the degree is 1, meaning only 1 edge connected to it
+
+
 def split_edges(nodes, edges, deleted_edge):
     edges.remove(deleted_edge)
     highest_num_vertex = 0
@@ -29,11 +31,12 @@ def split_edges(nodes, edges, deleted_edge):
             edges_to_split = [i for i in edges if vertex in i]
             edges_to_split_copy = edges_to_split[:]
             # This orders the numbers in each pair so that num1 is first
-            edges_to_split = [(vertex, a if a != vertex else b) if vertex in (a, b) else (a, b) for a, b in edges_to_split]
+            edges_to_split = [(vertex, a if a != vertex else b) if vertex in (
+                a, b) else (a, b) for a, b in edges_to_split]
             #  This is used to check the highest numbered node so it knows what to make the new edges with
             i = nodes[-1]
             # Remembers the first new node, for adding the extended edges from using the lemma
-            #place_holder1 = i + 1
+            # place_holder1 = i + 1
             # replaces all the edges_to_split with new edges
             # leaving one the first pair with num1 so that vertex isn't completely gone
             edge_list_temp = []
@@ -62,12 +65,12 @@ def split_edges(nodes, edges, deleted_edge):
             # print(new_list)
             # print(edges_to_split)
 
-
         else:
             nodes.remove(num1)
 
-#print(nodes)
-#print(edges)
+
+# print(nodes)
+# print(edges)
 split_edges(nodes, edges, deleted_edge)
-#print(nodes)
+# print(nodes)
 print(edges)
