@@ -6,8 +6,6 @@ import networkx as nx
 # Use get_data() to return the nodes and edges
 # TODO: Add a delete node option
 # TODO: Fix the edge lines so that they don't go over the nodes
-
-
 class InputPage:
     def __init__(self):
         # Using NetworkX to initialize a graph
@@ -31,8 +29,7 @@ class InputPage:
         self.pos[vertex] = (event.xdata, event.ydata)
         # These are the plotting lines, this is where to change the formatting of the nodes too
         plt.plot(event.xdata, event.ydata, 'o', markersize=12, color='red')
-        plt.text(event.xdata, event.ydata, str(vertex),
-                 fontsize=12, ha='center', va='center')
+        plt.text(event.xdata, event.ydata, str(vertex), fontsize=12, ha='center', va='center')
         plt.draw()
 
     # Adds edges to the nx.Graph()
@@ -71,10 +68,8 @@ class InputPage:
             y_values = [self.pos[v1][1], self.pos[v2][1]]
             self.ax.plot(x_values, y_values, color='black')
         for vertex, position in self.pos.items():
-            self.ax.plot(position[0], position[1], 'o',
-                         markersize=12, color='red')
-        nx.draw_networkx_labels(self.graph, self.pos,
-                                font_size=12, font_color='black', ax=self.ax)
+            self.ax.plot(position[0], position[1], 'o', markersize=12, color='red')
+        nx.draw_networkx_labels(self.graph, self.pos, font_size=12, font_color='black', ax=self.ax)
         plt.draw()
 
     # I set this functionality almost identically to the documentation because I didn't understand it fully
@@ -96,14 +91,12 @@ class InputPage:
             v1, v2 = edge
             x1, y1 = self.pos[v1]
             x2, y2 = self.pos[v2]
-            dist = abs((y2 - y1) * x - (x2 - x1) * y + x2 * y1 -
-                       y2 * x1) / ((y2 - y1) ** 2 + (x2 - x1) ** 2) ** 0.5
+            dist = abs((y2 - y1) * x - (x2 - x1) * y + x2 * y1 - y2 * x1) / ((y2 - y1) ** 2 + (x2 - x1) ** 2) ** 0.5
             if dist < 0.02:
                 self._delete_edge(edge)
                 break
     # TODO: Someday change this so it outputs the print() statements on the plot instead of the terminal
     # Switches edge_selection_mode between True and False
-
     def _toggle_edge_selection(self, event=None):
         self.edge_selection_mode = not self.edge_selection_mode
         if self.edge_selection_mode:
@@ -114,8 +107,7 @@ class InputPage:
     # This is the main method of the class. It sets the plot up and connects the events
     def show(self):
         # This code sets up the plot and header
-        self.ax.set_title(
-            "Double Click: Vertex | Single Click: Edge | \'e\': Toggle Deletion Mode\n--- Click inside of the grid --- ")
+        self.ax.set_title("Double Click: Vertex | Single Click: Edge | \'e\': Toggle Deletion Mode\n--- Click inside of the grid --- ")
         self.ax.set_xlim(0, 1)
         self.ax.set_ylim(0, 1)
         self.ax.set_xticks([])
@@ -123,8 +115,7 @@ class InputPage:
         self.ax.set_facecolor('white')
         # Looks for clicks and double-clicks and runs the method needed
         self.fig.canvas.mpl_connect('button_press_event', self._onclick)
-        self.fig.canvas.mpl_connect(
-            'key_press_event', self._toggle_edge_selection)
+        self.fig.canvas.mpl_connect('key_press_event', self._toggle_edge_selection)
         plt.show()
 
     # Second method to use for this class
