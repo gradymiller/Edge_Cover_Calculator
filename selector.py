@@ -2,7 +2,7 @@ import networkx as nx
 from collections import defaultdict
 
 
-class Graph:
+class Selector:
     def __init__(self, edges):
         self.time = None
         self.graph = defaultdict(list)
@@ -133,7 +133,7 @@ class Graph:
 
 
 edges = [(1, 2), (2, 3), (3, 1), (3, 4), (4, 5)]
-graph = Graph(edges)
+graph = Selector(edges)
 best_edge_to_remove = graph.find_best_edge_to_remove()
 print(best_edge_to_remove)
 

@@ -1,0 +1,48 @@
+SCRATCH FILE FOR main.py
+
+Run the input page to get nodes and edges
+
+Run the selector to determine the best edge to remove
+
+Do the case with e:                                     |
+    Run the lemma-splitting function on it              |   
+    Run the identifier to split path_graphs and others  |
+
+Do the case without e:
+    Just remove the selected edge
+    Run the identifier on it
+
+
+Set up a function builder
+    Every time the whole lemma method is applied, put in a new section of the equation
+    ex. ((x1 * x2) + x3)    NOTE: Multiply each piece and add the cases together
+
+    Original function: ((w/e) + (w/o e))
+
+    1. if more than 1 part in w/e -> plug this in for 'w/e': (part1 * part2 * part3)
+    2. if any part is not a path graph -> plug this in for part: ((w/e) + (w/o e)), run the lemma again
+    3. If at any time there is a path graph, just put the number in place of its respective variable
+    4. If all are path graphs, put the numbers in and DON'T run the lemma again
+
+
+----------------------------------------------------------------------------------------------
+Sudo-Code Workspace
+
+
+def inputpage()
+
+def selector()      |
+def lemma()         |  Combine these there together for simplicity, call it lemma_method()
+def identifier()    | input: nodes, edges, output: nested list(paths, notpaths)
+
+base_function = ((w/e) + (w/o e))
+
+def path function():
+    string = f'('
+    for len in len_paths:
+        string = string + f' * {len}'
+    string = string + ' ) * ' <- The extra multiplication to account for the non-path part of the equation
+
+
+
+for each non_path:
