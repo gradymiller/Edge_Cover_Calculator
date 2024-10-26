@@ -41,8 +41,14 @@ def path function():
     string = f'('
     for len in len_paths:
         string = string + f' * {len}'
-    string = string + ' ) * ' <- The extra multiplication to account for the non-path part of the equation
+    string = string + ' ) * ' <- The extra multiplication to account for the non-path part of the equation(optional, could use a placeholder here)
+
 
 
 
 for each non_path:
+
+------------------------------------------------------------------------------------------------
+NEW IDEA:
+- Do a whole level first before moving to the next one then only set up the program to be able to run 3 levels or something of that sort
+- Use nested for-each loops to get each part of the graphs accounted for

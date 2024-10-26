@@ -15,14 +15,15 @@ edges = [(min(a, b), max(a, b)) for a, b in edges]
 graph.add_edges_from(edges)
 degrees = graph.degree()  # type: ignore
 deleted_edge = (2, 4)
-num1 = deleted_edge[0]
-num2 = deleted_edge[1]
+
 
 # The if-else statement only does the splitting if the edge is connected to other edges
 # The vertex is deleted if the degree is 1, meaning only 1 edge connected to it
 
 
 def split_edges(nodes, edges, deleted_edge):
+    num1 = deleted_edge[0]
+    num2 = deleted_edge[1]
     edges.remove(deleted_edge)
     highest_num_vertex = 0
     for vertex in deleted_edge:
@@ -66,7 +67,8 @@ def split_edges(nodes, edges, deleted_edge):
             # print(edges_to_split)
 
         else:
-            nodes.remove(num1)
+            nodes.remove(deleted_edge[0])
+    return nodes, edges
 
 
 # print(nodes)
