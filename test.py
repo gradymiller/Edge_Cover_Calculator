@@ -2,7 +2,8 @@ from matplotlib.pyplot import show
 import networkx as nx
 from itertools import chain, combinations
 
-def fibonacci(n):
+def path_graph_evaluator(graph):
+    n = len(graph)
     if n == 0:
         return 0
     elif n == 1:

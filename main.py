@@ -28,6 +28,22 @@ class Node:
         # Running the split_edges program
         # Returns an updated set of self.nodes and self.edges
         return split_edges(self.nodes, self.edges, edge_to_remove)
+    
+
+graphs = [(1, 2), (2, 3), (3, 4), (4, 1)]
+
+def path_graph_evaluator(graph):
+    n = len(graph)
+    if n == 0:
+        return 0
+    elif n == 1:
+        return 1
+    else:
+        a, b = 0, 1
+        for _ in range(2, int(n) + 1):
+            a, b = b, a + b
+        return b
+
 
 
 
