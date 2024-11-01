@@ -1,36 +1,48 @@
-from identifier import Identifier
-from selector import Selector
-from lemma import split_edges
-import networkx as nx
+##from identifier import Identifier
+#from selector import Selector
+#from lemma import split_edges
+#import networkx as nx
 
 class Node:
-    def __init__(self, nodes=[], edges=[], operator='*'):
-        self.operator = operator
+    def __init__(self, signature, nodes=[], edges=[], operator='*'):
+        self.signature = signature
         self.nodes = nodes
         self.edges = edges
+        self.operator = operator
+        self.children = []
 
+    def __repr__(self):
+        return str(self.signature)
+    
+    def set_nodes(self):
+        pass
+
+    def set_edges(self):
+        pass
+    
     def run_lemma(self):
+        self.operator = '*'
+        pass # Return -> case with e, case without e (Run Identifier() on both cases)
 
-        # Get the edge to delete using the DFS
-        edge_to_remove = Selector(self.edges)
+    def make_children(self):
+        case1, case2 = [[[],[]],[[],[]]], [[[],[]],[[],[]]] # This is temporary because I haven't made the run_lemma() function
+        # yellow = each case, pink = paths/non-paths, blue = graph piece
+        for case in case1:
+            for c in case:
+                pass
+                
+        
 
-        self.nodes, self.edges =  self._perform_lemma_op(edge_to_remove)
 
 
-
-    def _perform_lemma_op(self, edge_to_remove):
-
-        # Set-up to be able to run split_edges function
-        graph = nx.Graph()
-        self.edges = [(min(a, b), max(a, b)) for a, b in self.edges]
-        graph.add_edges_from(self.edges)
-
-        # Running the split_edges program
-        # Returns an updated set of self.nodes and self.edges
-        return split_edges(self.nodes, self.edges, edge_to_remove)
     
 
-graphs = [(1, 2), (2, 3), (3, 4), (4, 1)]
+
+
+graph =[[(1, 2), (1, 4), (4, 3), (3, 2)]]
+node_list = [ Node(i) for i in range(len(graph))]
+
+
 
 def path_graph_evaluator(graph):
     n = len(graph)
