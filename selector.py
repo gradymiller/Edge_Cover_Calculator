@@ -132,7 +132,7 @@ class Selector:
             return best_edge, 'C'
 
 
-edges = [(1, 2), (2, 3), (3, 1), (3, 4), (4, 5)]
+edges = [(4, 5), (5, 6), (6, 4), (4, 2), (2, 1), (3, 1), (2, 3)]
 graph = Selector(edges)
 best_edge_to_remove = graph.find_best_edge_to_remove()
 print(best_edge_to_remove)

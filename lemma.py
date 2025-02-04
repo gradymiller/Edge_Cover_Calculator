@@ -8,8 +8,8 @@ import networkx as nx
 # The nodes and edges are there just for testing
 
 graph = nx.Graph()
-nodes = [1, 2, 3, 4, 5]
-edges = [(1, 2), (2, 3), (3, 1), (2, 4), (4, 5)]
+nodes = [1, 2, 3, 4, 5, 6]
+edges = [(4, 5), (5, 6), (6, 4), (4, 2), (2, 1), (3, 1), (2, 3)]
 # This below reorders the edges so that the smallest number is first, making it easier to work with
 edges = [(min(a, b), max(a, b)) for a, b in edges]
 graph.add_edges_from(edges)

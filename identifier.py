@@ -80,7 +80,7 @@ class Identifier:
 
 
 # Testing...
-test_nodes = [1, 3, 5, 6, 7, 8, 13, 14, 16]
-test_edges = [(6, 1), (7, 3), (1, 3), (8, 5), (6, 13), (7, 14), (8, 16)]
+test_nodes = [9, 5, 6, 10, 7, 1, 3, 15, 8, 16, 9, 19, 20]
+test_edges = [(9, 5), (5, 6), (10, 6), (7, 1), (1, 3), (8, 3), (7, 15), (8, 16), (9, 19), (10, 20)]
 test = Identifier(test_nodes, test_edges)
 print(test.check_type())
